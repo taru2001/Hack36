@@ -40,7 +40,7 @@ Feel free to file an issue if you come across any bugs
 
 ## Contributors:
 
-* [Prayag Gupta](github.com/paraggupta027)
+* [Parag Gupta](github.com/paraggupta027)
 * [Shobhit Gupta](github.com/iosdev474)
 * [Taru Gupta](github.com/taru2001)
 * [Yaggya Garg](github.com/yaggya01)
