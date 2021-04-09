@@ -9,7 +9,7 @@
 <img src="Edtube.jpeg" align="center">
 
 ## Introduction:
-<b>EDHUB</b> is an affordable video platform that will allow teachers to diversify their revenue sources and connect with their students at a more personal level.
+<b>EDTUBE</b> is an affordable video platform that will allow teachers to diversify their revenue sources and connect with their students at a more personal level.
 
 "DON’T PUT ALL YOUR EGGS IN ONE BASKET", these are words to live by the over relience of small online educational institutes on a single platforms makes there structure very unstable which is not a great thing as if their institue closes, the lives of not just the teacher but also their students can be derailed. As a solution we offer <b>EDUHUB</b> a video shearing and streaming platforms specially for teachers and students where we provide not just the functionality to shear videos but also to take live video chating sessions with teaches. 
 
@@ -41,7 +41,7 @@ Feel free to file an issue if you come across any bugs
 ## Contributors:
 
 * [Parag Gupta](github.com/paraggupta027)
-* [Shobhit Gupta](github.com/iosdev474)
+* [Shobhit Agarwal](github.com/shobhit2002)
 * [Taru Gupta](github.com/taru2001)
 * [Yaggya Garg](github.com/yaggya01)
 
