@@ -26,7 +26,7 @@
   2) JavaScript
   3) HTML5
   4) Django
-  5) Python
+  5) Sqlite3
   6) CSS
   
 <a name="feed"></a>
