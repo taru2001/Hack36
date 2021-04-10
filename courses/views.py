@@ -151,14 +151,16 @@ def teacher_courses(request,teacher_id):
             for i in stu_sub_courses:
                 stu_subs.append(i.course)
 
-        what=request.session["category"]
+        what=1
+        if "category" in request.session:
+            what=request.session["category"]
         if what=="teacher":
             what=1
         else:
             what=2
 
             
-        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide,'what':what,
+        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide, 'what':what,
                                 'stu_subs':stu_subs} )
         
             

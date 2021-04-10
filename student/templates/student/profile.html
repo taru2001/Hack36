@@ -24,14 +24,15 @@
     		<a class="navbar-brand" href="{% url 'student_home' %}"><img src="{% static 'images/logo.jpeg' %}" width="80px" height="50px"></a>
     	</div>
     	<div class="col-4">
-    		<form action="result.html" method="get">
-		    <div class="input-group mb-3">
-			  <input type="text" class="form-control search" placeholder="Search">
-			  <div class="input-group-append">
-			    <button type="submit" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Search!"><i class="fas fa-search"></i></button>
-			  </div>
-			</div>
-		</form>
+    		<form action="{% url 'student_result' %}" method="POST">
+				{% csrf_token %}
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control search" name='search' placeholder="Search">
+				  <div class="input-group-append">
+					<button type="submit" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Search!"><i class="fas fa-search"></i></button>
+				  </div>
+				</div>
+			</form>
 		</div>
 		<div class="col-4 text-right">
 			<a href="{% url 'student_profile' %}" class="btn btn-outline-primary"><i class="fas fa-user-circle" style="font-size: 20px;"></i> <span style="font-size:14px; font-weight: 600;">Profile</span></a>

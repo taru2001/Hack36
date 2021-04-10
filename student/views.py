@@ -243,3 +243,8 @@ def hue(request):
     rep={'name':890}
     response=json.dumps(rep)
     return requests.post('http://127.0.0.1:3000/', params = response)
+
+def see_course(request , teacherId):
+    user = request.user
+    if user.is_authenticated:
+        return HttpResponseRedirect(reverse('teacher_course',kwargs={'teacher_id':teacherId}) )

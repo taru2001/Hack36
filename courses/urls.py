@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('add_courseform/',views.course_form,name='course_form'),
     path('<int:teacher_id>/',views.teacher_courses,name='teacher_course'),
-
+    
     path('student/<int:student_id>/',views.student_courses,name='student_course'),
     
     path('seecourse/<int:course_id>/',views.seecourse,name='see_course'),
