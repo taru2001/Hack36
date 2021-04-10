@@ -10,8 +10,10 @@ from django.contrib import messages
 import json
 
 
-from .models import Course,Video
+
 from teacher.models import teacherProfile,Follower
+from .models import Course,Video,subscription
+
 
 from student.models import studentProfile
 
@@ -43,6 +45,55 @@ def course_form(request):
     
     messages.error(request,"Login First")
     return redirect('login_page')
+
+
+def student_courses(request,student_id):
+    user=request.user
+    if user.is_authenticated:
+        
+        curr_student = studentProfile.objects.filter(id=student_id)
+        if len(curr_student)==0:
+            return redirect('login_page')
+        print("ppo")
+        curr_student=curr_student[0]
+        curr_student_courses = subscription.objects.filter(student=curr_student)
+
+    
+        courses = []
+        tot=len(curr_student_courses)
+        tot_slide=int(tot/3)
+        var=0
+        curr=[]
+        
+
+        for i in curr_student_courses:
+            # print("hi")
+            var+=1
+            curr.append(i)
+            if var==3:
+                courses.append(curr)
+                curr=[]
+                var=0
+
+        if var<3 and var>0:
+            # curr.append(-1)
+            # curr.append(-1)
+            courses.append(curr)
+        # for i in courses:
+        #     for j in i:
+        #         print(j)
+
+        # print(courses[0][0].name)
+
+            
+        return render(request, 'courses/courses_student.html',{'all_courses':courses,'tot_slide':tot_slide} )
+        
+            
+    messages.error(request,"Login First")
+    return redirect('home_view')
+
+
+
 
 
 

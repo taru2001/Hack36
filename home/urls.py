@@ -14,4 +14,8 @@ urlpatterns = [
     path('user/google/validate/',views.validate_user,name='validate_user'), #Use This to redirect any user to its right place
     path('user/student/confirm/',views.student_confirm,name='student_confirm'),#Setting new Students here
     path('user/teacher/confirm/',views.teacher_confirm,name='teacher_confirm'), #Setting new Teacher here
+
+    path('notification/',views.notify,name='notification'),
+    path('delete_notify/<int:notify_id>/',views.delete_notify,name='delete_notify'),
+    path('deleteAll/',views.deleteAll,name='deleteAll')
 ]

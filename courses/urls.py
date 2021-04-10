@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
     path('add_courseform/',views.course_form,name='course_form'),
     path('<int:teacher_id>/',views.teacher_courses,name='teacher_course'),
+    path('student/<int:student_id>/',views.student_courses,name='student_course'),
     path('seecourse/<int:course_id>/',views.seecourse,name='see_course'),
     path('see_video/<int:video_id>/',views.see_video,name='see_video'),
     path('add_video/<int:course_id>/',views.addvideo,name='add_video'),

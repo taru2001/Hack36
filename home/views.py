@@ -8,8 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 #import models of user profiles
-from teacher.models import teacherProfile
+from teacher.models import teacherProfile,Follower
 from student.models import studentProfile
+from .models import Notification
 
 from django.conf import settings 
 from django.core.mail import send_mail
@@ -229,3 +230,43 @@ def teacher_confirm(request):
              
     print("user is not authenticated")
     return redirect('home_view')
+
+
+
+
+def notify(request):
+    user=request.user
+    if user.is_authenticated:
+        all_notify_obj = Notification.objects.filter(user=user)
+        all_msg=[]
+        for i in all_notify_obj:
+            all_msg.append(i)
+        return render(request,'home/notification.html',{'notify':all_msg})
+    return redirect('login_page')
+
+
+def delete_notify(request,notify_id):
+    user=request.user
+    if user.is_authenticated:
+        curr_notify = Notification.objects.filter(id=notify_id)
+
+        if len(curr_notify)!=0:
+            curr_notify.delete()
+            
+        return redirect('notification')
+
+
+    return redirect('login_page')
+
+
+def deleteAll(request):
+    user=request.user
+    if user.is_authenticated:
+        curr_notify_obj = Notification.objects.filter(user=user)
+        if curr_notify_obj:
+            for i in curr_notify_obj:
+                i.delete()
+
+        return redirect('notification')
+
+    return redirect('login_page')

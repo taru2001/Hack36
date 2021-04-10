@@ -12,5 +12,7 @@ urlpatterns = [
     path('',include('home.urls')),
     path('accounts/', include('allauth.urls')),
     path('teacher/',include('teacher.urls')),
-    
+    path('courses/',include('courses.urls')),
+    path('student/',include('student.urls')),
+    #path('paytm/',include('paytm.urls'))
 ] + static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)
