@@ -47,6 +47,7 @@ def course_form(request):
     return redirect('login_page')
 
 
+
 def student_courses(request,student_id):
     user=request.user
     if user.is_authenticated:
@@ -54,8 +55,11 @@ def student_courses(request,student_id):
         curr_student = studentProfile.objects.filter(id=student_id)
         if len(curr_student)==0:
             return redirect('login_page')
+
         print("ppo")
         curr_student=curr_student[0]
+        if curr_student.email!=user.email:
+            return redirect('login_page')
         curr_student_courses = subscription.objects.filter(student=curr_student)
 
     
@@ -134,9 +138,25 @@ def teacher_courses(request,teacher_id):
         #         print(j)
 
         # print(courses[0][0].name)
+        stu_subs=[]
+        
+        curr_stu = studentProfile.objects.filter(email=user.email)
+        if curr_stu:
+            curr_stu=curr_stu[0]
+            stu_sub_courses = subscription.objects.filter(student=curr_stu)
+            
+            for i in stu_sub_courses:
+                stu_subs.append(i.course)
+
+        what=request.session["category"]
+        if what=="teacher":
+            what=1
+        else:
+            what=2
 
             
-        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide} )
+        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide,'what':what,
+                                'stu_subs':stu_subs} )
         
             
     messages.error(request,"Login First")
@@ -401,6 +421,43 @@ def deleteVideo(request,videoId):
     
     else:
         return redirect('home_view')
+
+
+
+def handle_subscribe(request,*args):
+    user=request.user
+    if user.is_authenticated:
+        # auth_u = User.objects.get(username=user.email)
+        catg=request.session["category"]
+
+        if catg=="teacher":
+            return redirect('login_page')
+
+        courseid = request.GET.get('courseid',"")
+
+        curr_course = Course.objects.filter(id=courseid)
+        rep={}
+        if curr_course:
+            
+            curr_stu=studentProfile.objects.get(email=user.email)
+
+            curr_course=curr_course[0]
+            is_rel = subscription.objects.filter(course=curr_course,student=curr_stu)
+            if not is_rel:
+                newSUbs = subscription(course=curr_course,student=curr_stu)
+                newSUbs.save()
+                msg = "Congratulations "+str(curr_stu.firstname)+" "+str(curr_stu.lastname)+" just subscribed to course : "+str(curr_course.name)
+                auth_t = User.objects.get(username=curr_course.teacher.email)
+                newNotify = Notification(user=auth_t,message=msg)
+                newNotify.save()
+
+                print("subadded")
+
+        response=json.dumps(rep)
+        return HttpResponse(response,content_type='application/json')
+
+
+    return redirect('login_page')
 
 
     

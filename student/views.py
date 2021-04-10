@@ -176,3 +176,51 @@ def edit(request):
     user = request.user
     if user.is_authenticated:
         return render(request , 'student/editprofile.html')
+
+
+
+def manage_edit(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == 'POST':
+            fname = request.POST.get('firstname',"")
+            lname = request.POST.get('lastname',"")
+            passw = request.POST.get('password',"")
+            st = request.POST.get('state',"")
+            coun = request.POST.get('country',"")
+            profPic = request.FILES.get('profilePic',"")
+            addr = request.POST.get('address',"")
+
+            curr_user = studentProfile.objects.get(email=user.email)
+            ori_password=curr_user.password
+
+            curr_user.firstname=fname
+            curr_user.lastname=lname
+            curr_user.password=passw
+            curr_user.state=st
+            curr_user.country=coun
+            curr_user.address=addr
+
+            curr_user.save()
+
+            if ori_password==passw:
+                return redirect('login_page')
+
+            user.first_name=fname
+            user.last_name=lname
+            user.set_password(passw)
+            user.save()
+
+        # messages.success(request, {'msg':"Details updated successfully" , })
+        
+            user=authenticate(username=user.email,password=passw)
+            login(request,user)
+            return redirect('login_page')
+
+    messages.error(request,"Login in First")
+    return redirect('login_page')
+
+
+
+
+    return render(request , 'student/editprofile.html')
