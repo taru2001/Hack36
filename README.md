@@ -28,6 +28,7 @@
   4) Django
   5) Sqlite3
   6) CSS
+  7) EJS
   
 <a name="feed"></a>
 ## Feedback:
