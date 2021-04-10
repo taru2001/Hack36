@@ -18,6 +18,7 @@ def student_home_view(request):
     print("hello student")
     user = request.user
     if user.is_authenticated:
+        print(user.email)
         curr_user=studentProfile.objects.get(email=user.email)
         # print(curr_user.id)
 
@@ -66,6 +67,23 @@ def isUserMatching(str1 , str2):
 
 
 
+def student_result(request):
+    print("hello")
+    user = request.user
+    if user.is_authenticated:
+        curr_user=studentProfile.objects.get(email=user.email)
+        # print(curr_user.id)
+        name = request.POST.get('search')
+        print(name)
+        teachers = teacherProfile.objects.all()
+        mylist = []
+        for i in teachers:
+            if isUserMatching(i.firstname,name) or isUserMatching(i.lastname,name) or isUserMatching(name, i.lastname) or isUserMatching(name, i.firstname):
+                            mylist.append(i)           
+        return render(request, 'student/result.html',{'teachers':mylist})
+
+    messages.error(request,"Login First")
+    return redirect('login_page')
 
 
 def student_profile(request):
@@ -119,3 +137,37 @@ def searched_teacher_view(request,teacher_id):
     return redirect('login_page')
 
 
+
+def handlefollow(request,*args):
+    
+    user=request.user
+    if user.is_authenticated:
+        teacher_id=request.GET.get('teacher_id')
+        print(teacher_id)
+        curr_teacher = teacherProfile.objects.filter(id=teacher_id)
+
+        if len(curr_teacher)==0:
+            return redirect('login_page')
+
+        curr_teacher=curr_teacher[0]
+        curr_user = studentProfile.objects.get(email=user.email)
+
+        is_followed = Following.objects.filter(student=curr_user,teachers=curr_teacher)
+
+        if is_followed:
+            print("unfollow")
+            Following.unfollow(curr_user, curr_teacher)
+            Follower.unfollow(curr_teacher, curr_user)
+        else:
+            print("follow")
+            Follower.follow(curr_teacher, curr_user)
+            Following.follow(curr_user, curr_teacher)
+        print("heelo")
+        rep={
+
+        }
+        response=json.dumps(rep)
+
+        return HttpResponse(response,content_type='application/json')
+
+    return redirect('login_page')
