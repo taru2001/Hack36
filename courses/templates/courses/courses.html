@@ -2,12 +2,6 @@
     <head>
         <title>Courses</title>
         <!-- Font Awesome -->
-        <script
-			  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-			 ></script>
-       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
 rel="stylesheet"
@@ -28,6 +22,8 @@ rel="stylesheet"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
 ></script>
 
+
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -39,8 +35,6 @@ rel="stylesheet"
     
   }
 </style>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     </head>
 
@@ -54,16 +48,9 @@ data-mdb-ride="carousel"
 >
 
 <br>
-{% if what is 1 %}
+
 <a href="/"><i class="fas fa-angle-left fa-3x"></i></a>
-{%else%}
-<a style="margin-left: -90rem;" href="/"><i class="fas fa-angle-left fa-3x"></i></a>
-
-{%endif%}
-
-{% if what is 1 %}
 <a style="margin-left: 1200px;" href="/courses/add_courseform/" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> New Course</a>
-{%endif%}
 <br><br><br>
 <!-- Inner -->
 <div class="carousel-inner py-4">
@@ -113,6 +100,7 @@ data-mdb-ride="carousel"
 
               <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
 
+
             </div>
           </div>
         </div>
@@ -152,8 +140,8 @@ data-mdb-ride="carousel"
               {%endif%}
 
 
+              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
 
-              <!-- <a href="{% url 'delete' i.1.id %}" class="btn btn-primary"><i class="fa fa-trash-o fa-2x"></i></a> -->
             </div>
           </div>
         </div>
@@ -174,12 +162,11 @@ data-mdb-ride="carousel"
               </p>
               <a href="/courses/seecourse/{{i.2.id}}" class="btn btn-primary">See Course</a>
 
-
               {%if what is 2%}
 
               <button class="btn btn-primary subscribe" id="{{i.2.id}}">
 
-                  {% if i.1 in stu_subs %}
+                  {% if i.2 in stu_subs %}
                     Subscribed
                   
 
@@ -193,8 +180,8 @@ data-mdb-ride="carousel"
               {%endif%}
 
 
+              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
 
-              <!-- <a href="{% url 'delete' i.2.id %}" class="btn btn-primary"><i class="fa fa-trash-o fa-2x"></i></a> -->
             </div>
           </div>
         </div>
@@ -221,9 +208,9 @@ data-mdb-ride="carousel"
               <h5 class="card-title">{{i.0.name}}</h5>
               <p class="card-text">
                 {{i.0.description}}
+
               </p>
               <a href="/courses/seecourse/{{i.0.id}}" class="btn btn-primary">See Course</a>
-
 
               {%if what is 2%}
 
@@ -242,7 +229,10 @@ data-mdb-ride="carousel"
 
               {%endif%}
 
-              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary"><i class="fa fa-trash-o fa-2x"></i></a> -->
+
+              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
+
+
             </div>
           </div>
         </div>
@@ -259,9 +249,9 @@ data-mdb-ride="carousel"
               <h5 class="card-title">{{i.1.name}}</h5>
               <p class="card-text">
                 {{i.1.description}}
+
               </p>
               <a href="/courses/seecourse/{{i.1.id}}" class="btn btn-primary">See Course</a>
-
 
               {%if what is 2%}
 
@@ -281,8 +271,8 @@ data-mdb-ride="carousel"
               {%endif%}
 
 
+              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
 
-              <!-- <a href="{% url 'delete' i.1.id %}" class="btn btn-primary"><i class="fa fa-trash-o fa-2x"></i></a> -->
             </div>
           </div>
         </div>
@@ -303,12 +293,11 @@ data-mdb-ride="carousel"
               </p>
               <a href="/courses/seecourse/{{i.2.id}}" class="btn btn-primary">See Course</a>
 
-
               {%if what is 2%}
 
-              <button class="btn btn-primary subscribe" id="{{i.2.id}}">
+              <button class="btn btn-primary subscribe" id="{{i.0.id}}">
 
-                  {% if i.2 in stu_subs %}
+                  {% if i.0 in stu_subs %}
                     Subscribed
                   
 
@@ -321,7 +310,9 @@ data-mdb-ride="carousel"
 
               {%endif%}
 
-              <!-- <a href="{% url 'delete' i.2.id %}" class="btn btn-primary"><i class="fa fa-trash-o fa-2x"></i></a> -->
+
+              <!-- <a href="{% url 'delete' i.0.id %}" class="btn btn-primary" ><i class="fa fa-trash-o fa-2x"></i></a> -->
+
             </div>
           </div>
         </div>
@@ -333,6 +324,67 @@ data-mdb-ride="carousel"
   </div>
   {% endif %}
 {% endfor %}
+  <!-- Single item -->
+  <!-- <div class="carousel-item">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+          <div class="card">
+            <img
+              src="https://mdbootstrap.com/img/new/standard/nature/187.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+              </p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
+          <div class="card">
+            <img
+              src="https://mdbootstrap.com/img/new/standard/nature/188.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+              </p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
+          <div class="card">
+            <img
+              src="https://mdbootstrap.com/img/new/standard/nature/189.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+              </p>
+              <a href="#!" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
 </div>
 <!-- Inner -->
 <!-- Controls -->
@@ -360,10 +412,8 @@ data-mdb-ride="carousel"
 <!-- Carousel wrapper -->
 
 
-
 <script>
-
-    $(".subscribe").on('click',function(e){
+  $(".subscribe").on('click',function(e){
         var conf=confirm("Are you sure you want to subscribe to this course");
         if(conf){
         var id=this.id;
@@ -371,7 +421,7 @@ data-mdb-ride="carousel"
        
         var href="{% url 'subscribe_course' %}";
 
-        // e.preventDefault();
+        
         if(btnCon!="Subscribed"){
           console.log("clicked")
         $.ajax({
@@ -385,22 +435,10 @@ data-mdb-ride="carousel"
     }
 
     });
-
-
 </script>
 
 
-
     </body>
- <script type='text/javascript' >
-   
-   var menu = $("#btn1");
-  console.log(menu.html())
-   menu.on('click',()=>{
-    var dropdown = $("#btn1").children('.dropdown-menu');
-    dropdown.dropdown('toggle');
-     console.log(dropdown)
-   })
- </script>
+ 
 
 </html>
