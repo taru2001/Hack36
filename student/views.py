@@ -215,7 +215,7 @@ def manage_edit(request):
 
             if len(profPic):
                 curr_user.profileImage=profPic
-                print(profPic + "kklksldksds")
+                # print(profPic + "kklksldksds")
 
             curr_user.save()
 
@@ -229,6 +229,7 @@ def manage_edit(request):
         
             user=authenticate(username=user.email,password=passw)
             login(request,user)
+            request.session["category"]="student"
             return redirect('login_page')
 
     messages.error(request,"Login in First")
