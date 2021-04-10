@@ -20,9 +20,13 @@ class Course(models.Model):
     def __str__(self):
        return self.name
 
+
 class subscription(models.Model):
     course = models.ForeignKey(Course, on_delete = models.CASCADE)
     student = models.ForeignKey(studentProfile, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return str(self.course)
 
 
 class Video(models.Model):
