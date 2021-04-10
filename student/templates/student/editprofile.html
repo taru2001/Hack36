@@ -9,17 +9,19 @@
         <link rel="stylesheet" type="text/css" href="{% static 'student/edit.css' %}">
     </head>
     <body>
+        <form method="POST" action="/student/manage_edit">{% csrf_token %}
         <div class="container rounded bg-white mt-5">
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        {% if profileImage.url is not None %}
+                            {% if profileImage.url is not None %}
                         <img class="rounded-circle mt-5" src="{{profileImage.url}}" width="140">
                         {% else %}
                         <img class="rounded-circle mt-5" src="https://afribary.com/authors/anonymous-user/photo" width="140">
                         {% endif %}
-                        <span class="font-weight-bold">{{username}}</span><span class="text-black-50">{{email}}</span>
+                        <span class="font-weight-bold">{{fname}}</span><span class="text-black-50">{{email}}</span>
                         <span>{{country}}</span>
+                        <input type="file" name="profilePic" id="stats">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -30,12 +32,12 @@
                             </div>
                             <h6 class="text-right">Edit Profile</h6>
                         </div>
-                        <form method="post" action="/student/manage_edit">{% csrf_token %}
+                        
                             <span>First Name</span>
                             <span style="margin-left: 18rem;">Last Name</span>
                         <div class="row mt-2">
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="First Name" name="firstname" id="name" value="{{ name }}" ></div>
-                            <div class="col-md-6"><input type="text" class="form-control"  placeholder="Last Name" name="lastname" id="phone" value="{{mobile}}"></div>
+                            <div class="col-md-6"><input type="text" class="form-control" placeholder="First Name" name="firstname" id="name" value="{{ fname }}" ></div>
+                            <div class="col-md-6"><input type="text" class="form-control"  placeholder="Last Name" name="lastname" id="phone" value="{{ lname }}"></div>
                         </div>
                         <br>
                         <span>Country</span>
@@ -48,16 +50,17 @@
                         <span>Address</span>
                         <span style="margin-left: 19rem;">Password</span>
                         <div class="row mt-3">
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Address" name="address" id="stats" value="{{stats}}"></div>
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Password" name="password" id="description" value="{{description}}"></div>
+                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Address" name="address" id="stats" value="{{address}}"></div>
+                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Password" name="password" id="description" value="{{password}}"></div>
                         </div>
                         <br>
                         <br>
                         <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
-                    </form>
+                    
                     </div>
                 </div>
             </div>
         </div>
+    </form>
     </body>
 </html>

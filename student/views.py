@@ -91,6 +91,7 @@ def student_profile(request):
     if user.is_authenticated:
         curr_user = studentProfile.objects.get(email=user.email)
         user_tags = curr_user.tagline
+        profileImage = curr_user.profileImage
 
         tag_list=[]
         currword=""
@@ -108,7 +109,7 @@ def student_profile(request):
         currword+='  "'
         tag_list.append(currword)
 
-        return render(request, 'student/profile.html', {'user':curr_user,'word_list':tag_list})
+        return render(request, 'student/profile.html', {'user':curr_user,'word_list':tag_list , 'profileImage':profileImage})
 
     messages.error(request,"Login First")
     return redirect('login_page')
@@ -175,7 +176,17 @@ def handlefollow(request,*args):
 def edit(request):
     user = request.user
     if user.is_authenticated:
-        return render(request , 'student/editprofile.html')
+        curr_student = studentProfile.objects.get(email=user.email)
+        fname = curr_student.firstname
+        lname = curr_student.lastname
+        address = curr_student.address
+        state = curr_student.state
+        country = curr_student.country
+        password = curr_student.password
+        email = curr_student.email
+        profileImage = curr_student.profileImage
+        return render(request , 'student/editprofile.html' , {'fname':fname , 'lname':lname , 'address':address , 'state':state,
+                                                            'country':country , 'password':password, 'email':email, 'profileImage':profileImage    })
 
 
 
@@ -201,6 +212,10 @@ def manage_edit(request):
             curr_user.country=coun
             curr_user.address=addr
 
+            if len(profPic):
+                curr_user.profileImage=profPic
+                print(profPic + "kklksldksds")
+
             curr_user.save()
 
             if ori_password==passw:
@@ -210,8 +225,6 @@ def manage_edit(request):
             user.last_name=lname
             user.set_password(passw)
             user.save()
-
-        # messages.success(request, {'msg':"Details updated successfully" , })
         
             user=authenticate(username=user.email,password=passw)
             login(request,user)
