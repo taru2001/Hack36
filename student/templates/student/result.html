@@ -47,12 +47,13 @@
 				<a class="navbar-brand" href="index.html"><img src="images/logo.jpg" class="mb-2"></a>
 			</div>
 			<div class="col-7">
-				<form>
+				<form action="{% url 'student_result' %}" method="POST">
+					{% csrf_token %}
 					<div class="input-group mb-3">
-						<input type="text" class="form-control search" placeholder="Search">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Search!"><i class="fas fa-search"></i></button>
-						</div>
+					  <input type="text" class="form-control search" name='search' placeholder="Search">
+					  <div class="input-group-append">
+						<button type="submit" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Search!"><i class="fas fa-search"></i></button>
+					  </div>
 					</div>
 				</form>
 			</div>

@@ -13,6 +13,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'home/css/toast.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'home/css/login.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     </head>
 
@@ -29,7 +31,7 @@
 
         <div class="container">
             <!-- <a style="margin-left: 105px;" href="/"><button style="cursor: pointer;" class="col btn btn-pink-moon">Back to Home</button></a> -->
-            <a style="margin-left: 320px; margin-top: 1rem;" href="/" class="previous round">&#8249;</a>
+            <a style="margin-left: 380px; margin-top: 1rem;font-size:large;" href="/" class="previous round">&#8249;</a>
         
             <div class="row">
                 <div class="col-md-6">
@@ -44,7 +46,7 @@
                               <input type="submit" value="Login">
                             <div class="col-md-12">
                                 <ul class="social-network social-circle">
-                                    <li><a href={% provider_login_url 'google' %} class="icoGoogle" title="Google"><i class="fa fa-google"></i></a></li>
+                                    <li><a href={% provider_login_url 'google' %} class="icoGoogle" title="Google"><i style="font-size:50px;color: white;" class="fa fa-google"></i></a></li>
                                 </ul>
                             </div>
                         </form>

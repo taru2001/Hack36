@@ -160,7 +160,7 @@ def teacher_courses(request,teacher_id):
             what=2
 
             
-        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide,'what':what,
+        return render(request, 'courses/courses.html',{'all_courses':courses,'tot_slide':tot_slide, 'what':what,
                                 'stu_subs':stu_subs} )
         
             
@@ -320,6 +320,8 @@ def see_video(request,video_id):
                                     'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what  })
         else:
             return HttpResponse("NOT Susbcribed")
+
+
 
 def nextvideo_view(request,*args):
     user=request.user

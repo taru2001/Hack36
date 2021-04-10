@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'teacher',
     'student',
     'courses',
-    #'paytm',
+    'paytm',
     'allauth',
     'chat',
     'allauth.account',
