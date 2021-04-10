@@ -14,5 +14,7 @@ urlpatterns = [
 
     path('follow/',views.handlefollow,name='follow'),
     path('result/',views.student_result,name='student_result'),
+
+    path('hmm/',views.hue,name='huehue')
     
 ]

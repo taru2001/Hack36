@@ -45,15 +45,13 @@
                             <input required type="radio" value="2" name="category"><label style="color: white;">Student</label>
                             <br><br><br>
 
-                            <a href="/login/" style="text-decoration: none; color: rgb(240, 245, 248);">Already Registered ? Log in Here</a>
+                            <a href="/login/" style="text-decoration: none; color: rgb(240, 245, 248);" class="al-login">Already Registered ? Log in Here</a>
 
                             <input type="submit" name="signup_submit" value="Sign Up">
 
                             <div class="col-md-12">
                                 <ul class="social-network social-circle">
-                                    <li><a href="#"  class="fa fa-facebook" title="Facebook"></a></li>
-                                    <li><a href="#" class="fa fa-twitter" title="Twitter"></a></li>
-                                    <li><a onclick="storeDetails()" href={% provider_login_url 'google' %} class="icoGoogle" title="Google"><i class="fab fa-google"></i></a></li>
+                                    <li><a onclick="storeDetails()" href={% provider_login_url 'google' %} class="icoGoogle" title="Google"><i style="font-size:50px" class="fa fa-google"></i></a></li>
                                 </ul>
                             </div>
                         </form>
@@ -86,14 +84,11 @@
         toastr["error"](message);
     }
 
-<<<<<<< HEAD
     function storeDetails(){
         
     }
 
 
-=======
->>>>>>> 9bc362498cbd4b4e149df7f08ffd61173354eef3
     {% if messages %}
                 {% for message in messages %}
                 let x;

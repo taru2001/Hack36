@@ -6,17 +6,18 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from uuid import uuid4
 #import models of user profiles
 from teacher.models import teacherProfile,Follower
 from student.models import studentProfile
+from .models import forgotPassword
 from .models import Notification
 
 from django.conf import settings 
 from django.core.mail import send_mail
 import os
 from django.views.decorators.csrf import csrf_exempt
-
+from django.core.mail import send_mail
 # import string,random
 
 
@@ -173,7 +174,7 @@ def validate_user(request):
         if student is not None:
             print('user is a student')
             print(student.email)
-            return redirect('home_view') #for real purpose redirect to student dashboard
+            return redirect('student_home') #for real purpose redirect to student dashboard
 
         user=request.user
         user.username=user.email
@@ -202,10 +203,10 @@ def student_confirm(request):
             return redirect('teacher_home') #for real purpose redirect to teacher dashboard
         if student is not None:
             print('user is a student')
-            return redirect('logout') #for real purpose redirect to student dashboard
+            return redirect('student_home') #for real purpose redirect to student dashboard
         newStudent = studentProfile(email=request.user.email)
         studentProfile.save(newStudent)
-        return redirect('home_view') #for real purpose redirect to student dashboard        
+        return redirect('student_home') #for real purpose redirect to student dashboard        
     print("user is not authenticated")
     return redirect('home_view')
 
@@ -231,6 +232,59 @@ def teacher_confirm(request):
     print("user is not authenticated")
     return redirect('home_view')
 
+def handle_forgot_password(request):
+    if request.method == "POST":
+        email_user = request.POST.get('email')
+        # email = forgotPassword.objects.filter(email=email_user)
+        # if email is not None:
+        
+        student = studentProfile.objects.filter(email=email_user)
+        teacher = teacherProfile.objects.filter(email=email_user)
+        if teacher is None and student is None:
+            return redirect('validate_user')
+        token = uuid4()
+
+        content = f"http://127.0.0.1:8000/auth_forgot/{token}"
+        print(content)
+        send_mail('Forgot_password',content,'techstartechtechstar@gmail.com',[email_user],fail_silently=False)
+        new_forgot = forgotPassword(email=email_user,token=token)
+        new_forgot.save()
+        return redirect('success_forgot_password')
+       
+    return redirect('home_view')
+def auth_forgot_password(request,token):
+    forgotpassword = forgotPassword.objects.filter(token=token)
+    if forgotpassword is not None:
+        print(forgotpassword[0].email)
+        response = {
+                    'token':token,
+                    }
+        return render(request,'home/resetpassword.html',response)
+    return redirect('home_view')
+        
+def reset_password(request,token):
+    if request.method == "POST":
+        new_password = request.POST.get('password')
+        confirm_password = request.POST.get('confirmpassword')
+        # if (new_password != confirm_password):
+        #     response = {
+        #             'token':token,
+        #             }
+        #     return render(request,'home/resetpassword.html',response)
+        forgotpassword = forgotPassword.objects.filter(token=token)
+        if len(forgotpassword):
+            email = forgotpassword[0].email
+            forgotpassword.delete()
+            student = studentProfile.objects.filter(email=email)
+            teacher = teacherProfile.objects.filter(email=email)
+            print(len(student),len(teacher))
+            if len(student):
+                student[0].password = new_password
+                print("student password is changed")
+            if len(teacher):
+                teacher[0].password = new_password
+                print("teacher password is changed")
+    return redirect('home_view')
 
 
 

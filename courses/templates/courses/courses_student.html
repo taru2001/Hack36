@@ -1,3 +1,5 @@
+{% load static %}
+
 <html>
     <head>
         <title>Courses</title>
@@ -57,6 +59,7 @@ data-mdb-ride="carousel"
 <div class="carousel-inner py-4">
   <!-- Single item -->
 
+
   {% for i in all_courses %}
   {% if forloop.counter is 1 %}
   <!-- <script>console.log("{{i.0.name}}");</script> -->
@@ -68,6 +71,7 @@ data-mdb-ride="carousel"
         {% if i.0 is not None %}
         <div class="col-lg-4">
           <div class="card">
+            <script>console.log("{{i.0.thumbnail.url}}");</script>
             <img
               src="{{i.0.thumbnail.url}}"
               class="card-img-top"

@@ -11,6 +11,7 @@ from  teacher.models import teacherProfile,Follower,Following
 
 from courses.models import Course,Video
 import json
+import requests
 
 
 
@@ -171,3 +172,9 @@ def handlefollow(request,*args):
         return HttpResponse(response,content_type='application/json')
 
     return redirect('login_page')
+
+
+def hue(request):
+    rep={'name':890}
+    response=json.dumps(rep)
+    return requests.post('http://127.0.0.1:3000/', params = response)
