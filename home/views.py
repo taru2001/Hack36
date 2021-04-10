@@ -37,7 +37,7 @@ from django.views.decorators.csrf import csrf_exempt
 def home_view(request):
     user=request.user
     if user.is_authenticated:
-        return redirect('teacher_home')
+        return redirect('login_page')
     return render(request,'home/index.html',{})
 
 
@@ -45,7 +45,7 @@ def login_user(request):
 
     user=request.user
     if user.is_authenticated:
-        if "catgory" in request.session:
+        if "category" in request.session:
             catg = request.session["category"]
             if catg=="student":
                 return redirect('student_home')
