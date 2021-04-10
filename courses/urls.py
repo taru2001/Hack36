@@ -4,7 +4,7 @@ from django.conf.urls import url
 
 from . import views
 
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('add_courseform/',views.course_form,name='course_form'),
@@ -20,6 +20,6 @@ urlpatterns = [
     path('delete_video/<int:videoId>/',views.deleteVideo,name="delete_video"),
     path('like_video/',views.handle_like,name='like_func'),
 
-    path('subscribeCourse/',views.handle_subscribe,name='subscribe_course')
+    path('subscribeCourse/',views.handle_subscribe,name='subscribe_course'),
     
 ]

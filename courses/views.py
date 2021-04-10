@@ -52,7 +52,7 @@ def student_courses(request,student_id):
     user=request.user
     if user.is_authenticated:
         
-        curr_student = studentProfile.objects.filter(id=student_id)
+        curr_student = studentProfile.objects.filter(email=user.email)
         if len(curr_student)==0:
             return redirect('login_page')
 
@@ -60,8 +60,11 @@ def student_courses(request,student_id):
         curr_student=curr_student[0]
         if curr_student.email!=user.email:
             return redirect('login_page')
-        curr_student_courses = subscription.objects.filter(student=curr_student)
 
+        curr_student_obj = subscription.objects.filter(student=curr_student)
+        curr_student_courses=[]
+        for i in curr_student_obj:
+            curr_student_courses.append(i.course)
     
         courses = []
         tot=len(curr_student_courses)
