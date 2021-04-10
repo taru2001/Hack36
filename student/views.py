@@ -127,14 +127,18 @@ def searched_teacher_view(request,teacher_id):
 
         curr_teacher=curr_teacher[0]
         curr_student = studentProfile.objects.get(email=user.email)
-        follower = Follower.objects.filter(teacher=curr_teacher,students=curr_student)       
+        follower = Follower.objects.filter(teacher=curr_teacher,students=curr_student)   
+
+        tot_f = Follower.objects.filter(teacher=curr_teacher)
+
+        all_f =tot_f[0].students.count()   
 
         if  not follower:
             follower=0
         else:
             follower=1
 
-        return render(request, 'student/searchedteacher.html',{'id':teacher_id,'curr_teacher':curr_teacher,'follower':follower})
+        return render(request, 'student/searchedteacher.html',{'id':teacher_id,'all_f':all_f,'curr_teacher':curr_teacher,'follower':follower})
 
     return redirect('login_page')
 
@@ -165,9 +169,12 @@ def handlefollow(request,*args):
             Follower.follow(curr_teacher, curr_user)
             Following.follow(curr_user, curr_teacher)
         print("heelo")
+        tot=Follower.objects.filter(teacher=curr_teacher)
+        tot=tot[0].students.count()
         rep={
-
+            'tot':tot
         }
+        print(tot)
         response=json.dumps(rep)
 
         return HttpResponse(response,content_type='application/json')
