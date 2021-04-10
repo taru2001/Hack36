@@ -240,7 +240,7 @@ def handle_forgot_password(request):
         
         student = studentProfile.objects.filter(email=email_user)
         teacher = teacherProfile.objects.filter(email=email_user)
-        if teacher is None and student is None:
+        if len(teacher)!=0 and len(student)!=0:
             return redirect('validate_user')
         token = uuid4()
 
@@ -254,7 +254,7 @@ def handle_forgot_password(request):
     return redirect('home_view')
 def auth_forgot_password(request,token):
     forgotpassword = forgotPassword.objects.filter(token=token)
-    if forgotpassword is not None:
+    if len(forgotpassword)!=0:
         print(forgotpassword[0].email)
         response = {
                     'token':token,

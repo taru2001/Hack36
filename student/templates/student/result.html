@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-	<title>Youtube</title>
+	<title>EDUTUBE</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
@@ -19,8 +19,8 @@
 	<nav class="container-fluid fixed-top bg-white pt-2" id="top_nav">
 		<div class="row">
 			<div class="col-4 pl-4">
-				<a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.jpg'%}"></a>
-			</div>
+    		<a class="navbar-brand" href="{% url 'student_home' %}"><img src="{% static 'images/logo.jpeg' %}" width="80px" height="50px"></a>
+    	</div>
 			<div class="col-4">
 				<form action="{% url 'student_result' %}" method="POST">
     		{% csrf_token %}
