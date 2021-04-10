@@ -92,34 +92,31 @@ rel="stylesheet"
                 </div>
             </div>
         </div>
-        {% if not is_liked and not is_disliked and what is 0 %}
-        <button style="margin-left: 0rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        
+
+
+        {% if not is_liked and not is_disliked %}
+        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
         <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
         <span class="cnt dcount">{{tot_dislike}}</span>
         
 
-        {% elif not is_liked and what is 0 %}
-        <button style="margin-left: 0rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        {% elif not is_liked %}
+        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
         <button  class="btn btn-primary" id="disBtn" >DISLIKED</button>
         <span class="cnt dcount">{{tot_dislike}}</span>
 
-        {% endif %}
-
-
-        {% if what is 1 %}
-        <button style="margin-left: 0rem;" disabled  id="likeBtn" class="btn btn-primary">LIKE</button>
+        {%else%}
+        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKED</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
-        <button disabled  class="btn btn-primary" id="disBtn" >DISLIKE</button>
+        <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
         <span class="cnt dcount">{{tot_dislike}}</span>
-        
-
-        {% endif %}
-
+        {%endif%}
 
         <button class="btn btn-primary">Share</button>
         <button style="margin-left: 19rem;" class="btn btn-primary" onclick="play_prev_video()">Previous</button>

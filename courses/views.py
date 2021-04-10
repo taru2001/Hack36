@@ -136,9 +136,9 @@ def teacher_courses(request,teacher_id):
             # curr.append(-1)
             # curr.append(-1)
             courses.append(curr)
+
         # for i in courses:
-        #     for j in i:
-        #         print(j)
+        #     print(i)
 
         # print(courses[0][0].name)
         stu_subs=[]
@@ -263,7 +263,6 @@ def addvideo(request,course_id):
     return redirect('login_page')
 
 
-
 def see_video(request,video_id):
     user = request.user
     print(video_id)
@@ -277,41 +276,50 @@ def see_video(request,video_id):
                 what = 0
         
         curr_video = Video.objects.filter(id = video_id)
+        f = 1
+        if what==0:
+            print(curr_video[0].course_id)
+            course_student = subscription.objects.filter(course = curr_video[0].course_id)
+            m=1
+            for i in course_student:
+                if(i.student==user):
+                    m=0
+            if(m==1):
+                f=0
+        if f==1:
+            if len(curr_video) == 0:
+                return redirect('login_page')
+            curr_video = curr_video[0]
 
-        if len(curr_video) == 0:
-            return redirect('login_page')
-        
-        curr_video = curr_video[0]
+            tot_like=curr_video.likes.count()
+            print(tot_like)
 
-        tot_like=curr_video.likes.count()
-        print(tot_like)
+            tot_dislike = curr_video.dislikes.count()
+            print(tot_dislike)
 
-        tot_dislike = curr_video.dislikes.count()
-        print(tot_dislike)
-
-        is_liked = curr_video.likes.filter(email=user.email)
-        is_disliked = curr_video.dislikes.filter(email=user.email)
+            is_liked = curr_video.likes.filter(email=user.email)
+            is_disliked = curr_video.dislikes.filter(email=user.email)
 
 
-        is_viewed = curr_video.views.filter(email=user.email)
+            is_viewed = curr_video.views.filter(email=user.email)
 
-        if len(is_viewed)==0:
-            curr_video.add_view(user,video_id)
-        
-        if is_disliked:
-            is_disliked=1
+            if len(is_viewed)==0:
+                curr_video.add_view(user,video_id)
+            
+            if is_disliked:
+                is_disliked=1
+            else:
+                is_disliked=0
+
+            if is_liked:
+                is_liked=1
+            else:
+                is_liked=0
+
+            return render(request , 'courses/seevideo.html',{'id':video_id , 'video':curr_video ,'is_liked':is_liked,'is_disliked':is_disliked,
+                                    'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what  })
         else:
-            is_disliked=0
-
-        if is_liked:
-            is_liked=1
-        else:
-            is_liked=0
-
-        return render(request , 'courses/seevideo.html',{'id':video_id , 'video':curr_video ,'is_liked':is_liked,'is_disliked':is_disliked,
-                                'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what  })
-
-
+            return HttpResponse("NOT Susbcribed")
 
 def nextvideo_view(request,*args):
     user=request.user

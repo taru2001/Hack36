@@ -15,4 +15,5 @@ urlpatterns = [
     path('courses/',include('courses.urls')),
     path('student/',include('student.urls')),
     #path('paytm/',include('paytm.urls'))
+    path('chat/',include('chat.urls'))
 ] + static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)

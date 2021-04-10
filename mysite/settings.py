@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'courses',
     #'paytm',
     'allauth',
+    'chat',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
