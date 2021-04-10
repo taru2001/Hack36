@@ -6,7 +6,7 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![forthebadge made-with-javascipt](http://ForTheBadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com/)
 
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=35px> </a>
+
 <img src="Edtube.jpeg" align="center">
 
 ## Introduction:
