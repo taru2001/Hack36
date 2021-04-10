@@ -174,7 +174,6 @@ def handlefollow(request,*args):
 
     return redirect('login_page')
 
-<<<<<<< HEAD
 def edit(request):
     user = request.user
     if user.is_authenticated:
@@ -239,10 +238,8 @@ def manage_edit(request):
 
 
     return render(request , 'student/editprofile.html')
-=======
 
 def hue(request):
     rep={'name':890}
     response=json.dumps(rep)
     return requests.post('http://127.0.0.1:3000/', params = response)
->>>>>>> 0d69953bc7ae8b0f77186b72beac9c1b5926fdac
