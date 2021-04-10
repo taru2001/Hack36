@@ -171,3 +171,8 @@ def handlefollow(request,*args):
         return HttpResponse(response,content_type='application/json')
 
     return redirect('login_page')
+
+def edit(request):
+    user = request.user
+    if user.is_authenticated:
+        return render(request , 'student/editprofile.html')

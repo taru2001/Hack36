@@ -243,6 +243,14 @@ def see_video(request,video_id):
     user = request.user
     print(video_id)
     if user.is_authenticated:
+        if "category" in request.session:
+            cat = request.session["category"]
+            if cat == "teacher":
+                what = 1
+                print(what)
+            else:
+                what = 0
+        
         curr_video = Video.objects.filter(id = video_id)
 
         if len(curr_video) == 0:
@@ -276,7 +284,7 @@ def see_video(request,video_id):
             is_liked=0
 
         return render(request , 'courses/seevideo.html',{'id':video_id , 'video':curr_video ,'is_liked':is_liked,'is_disliked':is_disliked,
-                                'tot_like':tot_like,'tot_dislike':tot_dislike  })
+                                'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what  })
 
 
 
