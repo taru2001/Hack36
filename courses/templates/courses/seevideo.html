@@ -32,6 +32,8 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
 rel="stylesheet"
 />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- MDB -->
 <script
   type="text/javascript"
@@ -54,14 +56,13 @@ rel="stylesheet"
 
     
     <body style="background-color: brown;">
-        <!-- <p>hello world</p>
-        <video width="320" height="240" id="myvid" controls>
-            <source src="{{video.video.url}}" type="video/mp4">
-            <source src="{{video.video.url}}" type="video/ogg">
-            Your browser does not support the video tag.
-          </video> -->
-          <br>
-    <table>
+        <br>
+
+       
+
+        <button style="background-color: brown;outline: none;border: 0ch;" onclick="goBack()"><i class="fa fa-arrow-circle-left" style="font-size:48px;color:white"></i></button>
+
+    <table style="margin-left: 5rem;">
         <tr>
 
         <td>
@@ -91,6 +92,38 @@ rel="stylesheet"
                 </div>
             </div>
         </div>
+        {% if not is_liked and not is_disliked and what is 0 %}
+        <button style="margin-left: 0rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        <span class="cnt lcount">{{tot_like}}</span>
+
+        <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
+        <span class="cnt dcount">{{tot_dislike}}</span>
+        
+
+        {% elif not is_liked and what is 0 %}
+        <button style="margin-left: 0rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        <span class="cnt lcount">{{tot_like}}</span>
+
+        <button  class="btn btn-primary" id="disBtn" >DISLIKED</button>
+        <span class="cnt dcount">{{tot_dislike}}</span>
+
+        {% endif %}
+
+
+        {% if what is 1 %}
+        <button style="margin-left: 0rem;" disabled  id="likeBtn" class="btn btn-primary">LIKE</button>
+        <span class="cnt lcount">{{tot_like}}</span>
+
+        <button disabled  class="btn btn-primary" id="disBtn" >DISLIKE</button>
+        <span class="cnt dcount">{{tot_dislike}}</span>
+        
+
+        {% endif %}
+
+
+        <button class="btn btn-primary">Share</button>
+        <button style="margin-left: 19rem;" class="btn btn-primary" onclick="play_prev_video()">Previous</button>
+        <button class="btn btn-primary" onclick="play_next_video()">Next</button>
     </td>
 
     <td>
@@ -101,40 +134,16 @@ rel="stylesheet"
     
       </td>
     </tr>
-    <tr>
-        <td>
-            {% if not is_liked and not is_disliked %}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
-        <span class="cnt lcount">{{tot_like}}</span>
-
-        <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
-        <span class="cnt dcount">{{tot_dislike}}</span>
-        
-
-        {% elif not is_liked %}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
-        <span class="cnt lcount">{{tot_like}}</span>
-
-        <button  class="btn btn-primary" id="disBtn" >DISLIKED</button>
-        <span class="cnt dcount">{{tot_dislike}}</span>
-
-        {%else%}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKED</button>
-        <span class="cnt lcount">{{tot_like}}</span>
-
-        <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
-        <span class="cnt dcount">{{tot_dislike}}</span>
-        {%endif%}
-
-        <button class="btn btn-primary">Share</button>
-        <button style="margin-left: 20rem;" class="btn btn-primary" onclick="play_prev_video()">Previous</button>
-        <button class="btn btn-primary" onclick="play_next_video()">Next</button>
-        </td>
-    </td>
-    </tr>
     </table>
 
     </body>
+
+
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+        </script>
 
  
     <script>

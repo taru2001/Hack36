@@ -11,5 +11,5 @@ urlpatterns = [
     path('profile/',views.teacher_profile,name='teacher_profile'),
     path('edit/',views.editProfile,name='editProfile'),
     
-   
+   path('notifybox/',views.notify_box,name='notify_box')
 ]

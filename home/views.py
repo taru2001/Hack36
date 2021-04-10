@@ -49,7 +49,9 @@ def login_user(request):
     if user.is_authenticated:
         if "category" in request.session:
             catg = request.session["category"]
+            print(catg)
             if catg=="student":
+                print("hello student")
                 return redirect('student_home')
         return redirect('teacher_home')
 
@@ -261,6 +263,8 @@ def auth_forgot_password(request,token):
                     }
         return render(request,'home/resetpassword.html',response)
     return redirect('home_view')
+        
+
         
 def reset_password(request,token):
     if request.method == "POST":

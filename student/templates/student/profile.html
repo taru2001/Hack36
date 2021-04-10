@@ -21,7 +21,7 @@
 <nav class="container-fluid fixed-top bg-white pt-2" id="top_nav">
    	<div class="row">
   		<div class="col-4 pl-4">
-    		<a class="navbar-brand" href="{% url 'student_home' %}"><img src="{% static 'images/logo.jpeg' %}" width="80px" height="50px"></a>
+    		<a class="navbar-brand" href="{% url 'student_home' %}"><img src="{% static 'images/logo.jpeg' %}" width="120px" height="30px"></a>
     	</div>
     	<div class="col-4">
     		<form action="result.html" method="get">
@@ -94,7 +94,7 @@
         </li>
 
         <li class="has-subnav mb-2" id="">
-          <a href="subscription.html">
+          <a href="/courses/student/{{user.id}}">
            <span class="fa fa-2x">
 	            <svg style="display: block; height: 24px; width: 24px;margin: auto;" viewBox="0 0 24 24">
 				  <path d="M18.7 8.7H5.3V7h13.4v1.7zm-1.7-5H7v1.6h10V3.7zm3.3 8.3v6.7c0 1-.7 1.6-1.6 1.6H5.3c-1 0-1.6-.7-1.6-1.6V12c0-1 .7-1.7 1.6-1.7h13.4c1 0 1.6.8 1.6 1.7zm-5 3.3l-5-2.7V18l5-2.7z" fill="#606060"></path>
@@ -143,17 +143,22 @@
 	<div class="grid_title">Profile</div>
 	<div class="row p-2">
 		<div class="col-md-2 col-xs-2 mt-4">
+			{% if profileImage is None %}
 			<img src="https://joeschmoe.io/api/v1/Youtube" class="rounded border" width="150" height="150">
+
+			{%else%}
+			<img src="{{profileImage.url}}" class="rounded border" width="150" height="150">
+
+			{%endif%}
 		</div>
 		<div class="col-md-6  col-xs-6 pl-2">
 			<div class="profile">
-				<div class="profile_title">		Name: {{user.firstname}} {{user.lastname}}</div>
-				<div class="profile_title1">	Email: {{user.email}}  <br></div>
+				<div style="margin-left: 3rem;" class="profile_title">		Name: {{user.firstname}} {{user.lastname}}</div>
+				<div style="margin-left: 3rem;" class="profile_title1">	Email: {{user.email}}  <br></div>
 			</div>
 		</div>
 		<div class="col-md-2  col-xs-2 text-right change_btn">
-			<a href="" class="btn btn-outline-primary btn-sm mb-2">Change Password</a><br>
-			<a href="" class="btn btn-outline-primary btn-sm">Change Account Info</a>
+			<a href="/student/edit/" class="btn btn-outline-primary btn-sm">Change Account Info</a>
 		</div>
 	</div>
 	

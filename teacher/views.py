@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import teacherProfile
 
+from .models import Follower
+
+from home.models import Notification
 
 
 def teacher_home_view(request):
@@ -96,7 +99,44 @@ def editProfile(request):
         
             user=authenticate(username=user.email,password=passw)
             login(request,user)
+            request.session["category"]="teacher"
             return redirect('login_page')
 
     messages.error(request,"Login in First")
+    return redirect('login_page')
+
+
+
+def notify_box(request):
+    user=request.user
+    if user.is_authenticated:
+        if request.method=='POST':
+
+            catg=1
+            if "category" in request.session:
+                catg=request.session["category"]
+            if catg=="student":
+                return redirect('login_page')
+
+            msg=request.POST.get('msg',"")
+
+            curr_teacher=teacherProfile.objects.get(email=user.email)
+            curr_follower_obj=Follower.objects.filter(teacher=curr_teacher)
+
+
+            if len(curr_follower_obj)!=0:
+                curr_follower_obj=curr_follower_obj[0]
+                all_fllw = curr_follower_obj.students.all()
+                # print(all_fllw)
+                for i in all_fllw:
+                    auth_i=User.objects.get(username=i.email)
+                    mssg = str(curr_teacher.firstname)+" "+str(curr_teacher.lastname)+" : "+msg
+                    newNotify = Notification(user=auth_i,message=mssg)
+                    newNotify.save()
+            
+            return redirect('login_page')
+
+
+        return render(request,'teacher/box.html')
+
     return redirect('login_page')
