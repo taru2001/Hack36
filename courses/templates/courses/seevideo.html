@@ -96,7 +96,7 @@ rel="stylesheet"
 
 
         {% if not is_liked and not is_disliked %}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        <button style="margin-left: 1rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
         <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
@@ -104,14 +104,14 @@ rel="stylesheet"
         
 
         {% elif not is_liked %}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
+        <button style="margin-left: 1rem;"  id="likeBtn" class="btn btn-primary">LIKE</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
         <button  class="btn btn-primary" id="disBtn" >DISLIKED</button>
         <span class="cnt dcount">{{tot_dislike}}</span>
 
         {%else%}
-        <button style="margin-left: 3rem;"  id="likeBtn" class="btn btn-primary">LIKED</button>
+        <button style="margin-left: 1rem;"  id="likeBtn" class="btn btn-primary">LIKED</button>
         <span class="cnt lcount">{{tot_like}}</span>
 
         <button  class="btn btn-primary" id="disBtn" >DISLIKE</button>
@@ -119,13 +119,33 @@ rel="stylesheet"
         {%endif%}
 
         <button class="btn btn-primary">Share</button>
-        <button style="margin-left: 19rem;" class="btn btn-primary" onclick="play_prev_video()">Previous</button>
+        <button style="margin-left: 35rem;" class="btn btn-primary" onclick="play_prev_video()">Previous</button>
         <button class="btn btn-primary" onclick="play_next_video()">Next</button>
     </td>
 
     <td>
-        <h1 style="margin-left: 15rem;color: aliceblue;">Comments</h1>
-        <textarea style="width: 30rem; margin-left: 7rem; height: 30rem;"></textarea>
+        <div class="all-comment">
+            <div id="cmnt_container" class="comments-container">
+                {%for comment in comments %}
+                <div class="comments-box">
+                <ul class="comments-wrapper">
+                    <li class="comments-body">
+                    <div class="comments-img">UserName:</div>
+                    <div class="comments-text">{{comment.msg}}</div>
+                    </li>
+                 
+                    
+                </ul>
+                    
+                </div>
+               {% endfor %}
+                <!-- <span required id="comments-prepend"></span> -->
+            </div>
+            <div class="comments-input">
+            <input type="text" id="commenttxt" class="comments-input">
+            <button value="Comment" id="comment"class="btn btn-primary">Comments</button>
+             </div>
+        </div>
         
    
     
@@ -198,6 +218,96 @@ rel="stylesheet"
     var likecnt = $(".lcount");
     var dislikecnt = $(".dcount");
 
+    likebtn.on('click',function(e){
+        
+        var likeCon = likebtn.text();
+
+        lcnt=
+        $.ajax({
+                url:hreff,
+                data:{'vidid':id,'which':"1"},
+
+                success:function(response){
+                    if(likeCon=="LIKE"){
+                        likebtn.html("LIKED");
+                        dislikebtn.html("DISLIKE");
+                    }
+                    else{
+                        likebtn.html("LIKE");
+                    }
+                    likecnt.html(response.likecnt);
+                    dislikecnt.html(response.dislikecnt);
+                }
+              });
+    });
+
+    dislikebtn.on('click',function(e){
+       
+        var dislikeCon = dislikebtn.text();
+       
+        $.ajax({
+                url:hreff,
+                data:{'vidid':id,'which':"2"},
+
+                success:function(response){
+                    if(dislikeCon=="DISLIKE"){
+                        dislikebtn.html("DISLIKED");
+                        likebtn.html("LIKE");
+                    }
+                    else{
+                        dislikebtn.html("DISLIKE");
+                    }
+                    likecnt.html(response.likecnt);
+                    dislikecnt.html(response.dislikecnt);
+                }
+              });
+    });
+    
+</script>
+
+<script>
+    var id="{{id}}";
+    var likebtn = $("#likeBtn");
+    var dislikebtn = $("#disBtn");
+    var hreff="{% url 'like_func' %}";
+    var likecnt = $(".lcount");
+    var dislikecnt = $(".dcount");
+    var commentbtn = $('#comment');
+    var commentsprep = $('#cmnt_container')
+    var commentinpt = $('#commenttxt')
+    
+    commentbtn.on('click',(e)=>{
+        console.log("commentbtn")
+        console.log(commentinpt);
+        var commenttxt = commentinpt.val()
+        // if(commenttxt !== '')
+        $.ajax({
+            type:"GET",
+            url:"{% url 'handle_comment' %}",
+            data:{
+                'comment':commenttxt,
+                'videoid':id,
+                },
+            success:(response)=>{
+               
+           
+           var appendtxt = `<div class="comments-box">
+                           <ul class="comments-wrapper">
+                               <li class="comments-body">
+                               <div class="comments-img">UserName:</div>
+                               <div class="comments-text">${commenttxt}</div>
+                               </li>
+                           </ul>
+                           </div>`
+                        commentinpt.val('')
+           
+           commentsprep.prepend(appendtxt)
+           console.log(appendtxt)
+        
+            
+            }
+        })
+    })
     likebtn.on('click',function(e){
         
         var likeCon = likebtn.text();

@@ -12,7 +12,7 @@ import json
 
 
 from teacher.models import teacherProfile,Follower
-from .models import Course,Video,subscription
+from .models import Course,Video,subscription,Comment
 
 
 from student.models import studentProfile
@@ -299,7 +299,7 @@ def see_video(request,video_id):
 
             is_liked = curr_video.likes.filter(email=user.email)
             is_disliked = curr_video.dislikes.filter(email=user.email)
-
+            comments = Comment.objects.filter(video=curr_video)
 
             is_viewed = curr_video.views.filter(email=user.email)
 
@@ -317,7 +317,7 @@ def see_video(request,video_id):
                 is_liked=0
 
             return render(request , 'courses/seevideo.html',{'id':video_id , 'video':curr_video ,'is_liked':is_liked,'is_disliked':is_disliked,
-                                    'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what  })
+                                    'tot_like':tot_like,'tot_dislike':tot_dislike , 'what':what,'comments':comments  })
         else:
             return HttpResponse("NOT Susbcribed")
 
@@ -468,6 +468,23 @@ def handle_subscribe(request,*args):
 
                 print("subadded")
 
+        response=json.dumps(rep)
+        return HttpResponse(response,content_type='application/json')
+
+
+    return redirect('login_page')
+
+def handle_comment(request):
+    user=request.user
+    if user.is_authenticated:
+        comm = request.GET.get('comment',"")
+        videoid = request.GET.get('videoid',"")
+        curr_auth_user = User.objects.get(username=user.email)
+        curr_video = Video.objects.get(id=videoid)
+        newComm = Comment(user=curr_auth_user,msg=comm,video=curr_video)
+        newComm.save()
+        print("Ajax is working")
+        rep={}
         response=json.dumps(rep)
         return HttpResponse(response,content_type='application/json')
 

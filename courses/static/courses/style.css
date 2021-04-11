@@ -229,3 +229,49 @@
     /* background-color: orangered; */
     background-color: rgba(255, 69, 0, 0.5);
 }
+
+.all-comment{
+    flex:display;
+    flex-direction: column;
+    justify-content: center;
+}
+.comments-input,.btn{
+    flex-basis: 20%;
+    margin-left: 10%;
+}
+.comments-container{
+   
+    overflow-y: auto;
+    width: 30rem; 
+    margin-left: 7rem; 
+    height: 30rem;
+    background-color: white;
+  
+}
+.comments-box{
+    display:flex;
+}
+
+.comments-wrapper{
+    display:flex;
+    flex-basis: 100%;
+    flex-flow:row wrap;
+    word-wrap: anywhere;
+    border-bottom:2px solid rgb(102, 99, 99);
+    padding:2% 2%;
+}
+.comments-body{
+    display:flex;
+    justify-content: flex-start;
+    flex-basis: 100%;
+    list-style-type: none;
+    
+}
+.comments-img{
+    flex-basis:30%;
+}
+
+.comments-text{
+    flex-basis:70%;
+    word-wrap:anywhere;
+}

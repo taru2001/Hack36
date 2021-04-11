@@ -3,7 +3,7 @@ const socket = io("/");
 const chatInputBox = document.getElementById("chat_message");
 const all_messages = document.getElementById("all_messages");
 const leave_meeting = document.getElementById("leave-meeting");
-const main__chat__window = document.getElementById("main__chat__window");
+const main_chatwindow = document.getElementById("mainchat_window");
 const videoGrid = document.getElementById("video-grid");
 const myVideo = document.createElement("video");
 var m,imd;
@@ -34,7 +34,7 @@ navigator.mediaDevices.getUserMedia({
     console.log("hehehehe");
     call.answer(stream)
     const video = document.createElement('video')
-    video.setAttribute('id',)
+   
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
     })
@@ -75,11 +75,11 @@ function addMsgToWindow(message){
     li.innerHTML = message
   
   all_messages.append(li);
-  // main__chat__window.scrollTop = main__chat__window.scrollHeight; 
+  // main_chatwindow.scrollTop = mainchat_window.scrollHeight; 
   // if (message.user != currentUserId) {
   //   pendingMsg++;
   //   playChatSound();
-  //   document.getElementById("chat__Btn").classList.add("has__new"); 
+  //   document.getElementById("chat_Btn").classList.add("has_new"); 
   //   document.getElementById(
   //     "chat__Btn"
   //   ).children[1].innerHTML = `Chat (\${pendingMsg})`;
@@ -143,7 +143,7 @@ function addVideoStream(video, stream) {
 
 	// chatInputBox.addEventListener("focus", () => {
 	// 	if(document.getElementById("chat__Btn")){
-  //    		document.getElementById("chat__Btn".classList.remove("has__new"));
+  //    		document.getElementById("chat_Btn".classList.remove("has_new"));
 	// 		pendingMsg = 0;
   //    		document.getElementById("chat__Btn").children[1].innerHTML='Chat';
   //    	}
@@ -185,19 +185,10 @@ async function shareScreen(){
     audio: {echoCancellation:true,noiseSuppression:true}
   }).then(stream => {
     
-    // for (let [key, value] of peers.entries())
-    // peers.get(key)[0].getSenders()[1].replaceTrack(stream);
-
-    for (var key of peers.keys()) {
-      // var x=peers.get(key);
-      // console.log(x.getSenders());
-      // x.peerConnection.getSenders()[1].replaceTrack=stream.getVideoTracks[0];
-
-      const call = myPeer.call(key, stream);
-
-  }
-  myVideoStream=stream;
+    myVideoStream=stream;
     myVideo.srcObject=stream;
+
+  
   })
   
 }
