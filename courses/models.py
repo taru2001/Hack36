@@ -89,6 +89,18 @@ class Comment(models.Model):
         return str(self.msg)
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    msg = models.CharField(max_length=50,blank=True,default="")
+    time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['-time']
+
+        def __str__(self):
+            return str(self.msg)
+
 
 
 

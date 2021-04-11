@@ -168,6 +168,7 @@ def teacher_courses(request,teacher_id):
     return redirect('home_view')
 
 
+
 def seecourse(request,course_id):
     user=request.user
     if user.is_authenticated:
@@ -211,6 +212,7 @@ def seecourse(request,course_id):
 
     messages.error(request,"Login First")
     return redirect('login_page')
+
 
 
 
@@ -484,6 +486,25 @@ def handle_comment(request):
         newComm = Comment(user=curr_auth_user,msg=comm,video=curr_video)
         newComm.save()
         print("Ajax is working")
+        rep={}
+        response=json.dumps(rep)
+        return HttpResponse(response,content_type='application/json')
+
+
+    return redirect('login_page')
+
+
+def handle_comment(request,*args):
+    user=request.user
+    if user.is_authenticated:
+        comm = request.GET.get('comm',"")
+        videoid = request.GET.get('videoid',"")
+        curr_auth_user = User.objects.get(username=user.email)
+        curr_video = Video.objects.get(id=videoid)
+        newComm=Comment(user=curr_auth_user,msg=comm,video=curr_video)
+
+        newComm.save()
+
         rep={}
         response=json.dumps(rep)
         return HttpResponse(response,content_type='application/json')
