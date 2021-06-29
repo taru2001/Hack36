@@ -1,7 +1,8 @@
 <h1 align="center">EDTUBE</h1>
 
 <h3>The art of teaching is the art of Assisting Discovery </h3>
-[![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
+[![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)]
+(https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
 [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://html.com)
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 [![forthebadge made-with-javascipt](http://ForTheBadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com/)
